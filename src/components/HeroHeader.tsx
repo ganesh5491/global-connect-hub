@@ -16,14 +16,14 @@ const HeroHeader = () => {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/__l5e/assets-v1/41de9c1c-28e4-449e-a502-f57f3009bfce/hero-video.mp4" type="video/mp4" />
+          <source src="/__l5e/assets-v1/7e34f021-8382-4f37-b03a-91bd34956f71/hero-video.mp4" type="video/mp4" />
         </video>
         {/* Overlay gradient */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, hsl(224 76% 15% / 0.88) 0%, hsl(220 60% 10% / 0.72) 50%, hsl(152 60% 20% / 0.65) 100%)",
+              "linear-gradient(135deg, hsl(224 76% 15% / 0.88) 0%, hsl(220 60% 10% / 0.75) 50%, hsl(224 76% 20% / 0.70) 100%)",
           }}
         />
         {/* Bottom fade */}
