@@ -23,7 +23,7 @@ const HeroHeader = () => {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, hsl(224 76% 15% / 0.88) 0%, hsl(220 60% 10% / 0.72) 50%, hsl(152 60% 20% / 0.65) 100%)",
+              "linear-gradient(135deg, hsl(224 76% 15% / 0.88) 0%, hsl(220 60% 10% / 0.75) 50%, hsl(224 76% 20% / 0.70) 100%)",
           }}
         />
         {/* Bottom fade */}
