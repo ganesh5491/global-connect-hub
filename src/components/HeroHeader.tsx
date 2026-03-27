@@ -1,28 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ShoppingCart, Factory, ArrowRight } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
 import Navbar from "./Navbar";
 import TradeJourney from "./TradeJourney";
 
 const HeroHeader = () => {
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Background Image */}
+      {/* Background Video */}
       <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt="Global trade port at sunset"
-          width={1920}
-          height={1080}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           className="w-full h-full object-cover"
-        />
+        >
+          <source src="/__l5e/assets-v1/41de9c1c-28e4-449e-a502-f57f3009bfce/hero-video.mp4" type="video/mp4" />
+        </video>
         {/* Overlay gradient */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, hsl(224 76% 15% / 0.88) 0%, hsl(220 60% 10% / 0.72) 50%, hsl(224 76% 20% / 0.65) 100%)",
+              "linear-gradient(135deg, hsl(224 76% 15% / 0.88) 0%, hsl(220 60% 10% / 0.72) 50%, hsl(152 60% 20% / 0.65) 100%)",
           }}
         />
         {/* Bottom fade */}
