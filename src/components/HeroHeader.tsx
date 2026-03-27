@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ShoppingCart, Factory, ArrowRight } from "lucide-react";
-import heroVideo from "/hero-video.mp4.asset.json";
 import Navbar from "./Navbar";
 import TradeJourney from "./TradeJourney";
 
