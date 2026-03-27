@@ -16,7 +16,7 @@ const HeroHeader = () => {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/__l5e/assets-v1/41de9c1c-28e4-449e-a502-f57f3009bfce/hero-video.mp4" type="video/mp4" />
+          <source src="/__l5e/assets-v1/7e34f021-8382-4f37-b03a-91bd34956f71/hero-video.mp4" type="video/mp4" />
         </video>
         {/* Overlay gradient */}
         <div
