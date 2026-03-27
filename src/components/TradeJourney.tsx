@@ -12,7 +12,7 @@ import {
   Star,
   ArrowRight,
 } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 
 const steps = [
   { Icon: Globe, title: "Indian Manufacturers" },
@@ -30,31 +30,50 @@ const steps = [
 
 const TradeJourney = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const checkScroll = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 2);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 2);
-  };
+  const directionRef = useRef<1 | -1>(1);
+  const animRef = useRef<number>(0);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    checkScroll();
-    el.addEventListener("scroll", checkScroll);
-    window.addEventListener("resize", checkScroll);
+
+    const speed = 0.5; // px per frame
+
+    const animate = () => {
+      if (!el) return;
+      el.scrollLeft += speed * directionRef.current;
+
+      // Reverse direction at edges
+      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 1) {
+        directionRef.current = -1;
+      } else if (el.scrollLeft <= 0) {
+        directionRef.current = 1;
+      }
+
+      animRef.current = requestAnimationFrame(animate);
+    };
+
+    animRef.current = requestAnimationFrame(animate);
+
+    // Pause on hover
+    const pause = () => cancelAnimationFrame(animRef.current);
+    const resume = () => {
+      animRef.current = requestAnimationFrame(animate);
+    };
+
+    el.addEventListener("mouseenter", pause);
+    el.addEventListener("mouseleave", resume);
+    el.addEventListener("touchstart", pause);
+    el.addEventListener("touchend", resume);
+
     return () => {
-      el.removeEventListener("scroll", checkScroll);
-      window.removeEventListener("resize", checkScroll);
+      cancelAnimationFrame(animRef.current);
+      el.removeEventListener("mouseenter", pause);
+      el.removeEventListener("mouseleave", resume);
+      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("touchend", resume);
     };
   }, []);
-
-  const scroll = (dir: "left" | "right") => {
-    scrollRef.current?.scrollBy({ left: dir === "left" ? -200 : 200, behavior: "smooth" });
-  };
 
   return (
     <div className="container mx-auto px-4 lg:px-8">
@@ -69,33 +88,11 @@ const TradeJourney = () => {
           Your Trade Journey
         </h2>
 
-        {/* Scrollable horizontal flow */}
         <div className="relative">
-          {/* Left fade + arrow */}
-          {canScrollLeft && (
-            <button
-              onClick={() => scroll("left")}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:bg-primary/90 transition-colors"
-            >
-              <ArrowRight size={16} className="rotate-180" />
-            </button>
-          )}
-          {canScrollLeft && (
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-card to-transparent z-[5] pointer-events-none rounded-l-xl" />
-          )}
-
-          {/* Right fade + arrow */}
-          {canScrollRight && (
-            <button
-              onClick={() => scroll("right")}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:bg-primary/90 transition-colors"
-            >
-              <ArrowRight size={16} />
-            </button>
-          )}
-          {canScrollRight && (
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-card to-transparent z-[5] pointer-events-none rounded-r-xl" />
-          )}
+          {/* Left fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-card to-transparent z-[5] pointer-events-none rounded-l-xl" />
+          {/* Right fade */}
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-card to-transparent z-[5] pointer-events-none rounded-r-xl" />
 
           <div
             ref={scrollRef}
