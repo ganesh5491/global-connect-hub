@@ -17,13 +17,8 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between py-5 px-4 lg:px-8">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <span className="text-2xl font-extrabold tracking-tight text-primary-foreground">
-            T-IMOEXO
-          </span>
-          <span className="hidden sm:block text-xs text-primary-foreground/70 uppercase tracking-widest leading-tight">
-            International<br />Pvt Ltd.
-          </span>
+        <div className="flex items-center gap-3">
+          <img src="/images/logo.png" alt="T-IMOEXO International Pvt Ltd" className="h-10 sm:h-12" />
         </div>
 
         {/* Desktop Nav */}
